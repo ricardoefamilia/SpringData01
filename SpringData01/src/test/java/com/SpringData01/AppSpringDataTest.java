@@ -21,14 +21,14 @@ public class AppSpringDataTest {
 		Usuario usuario = new Usuario();
 		usuario.setEmail("ricardo@gmail.com");
 		usuario.setIdade(51);
-		usuario.setId(1L);
+		//usuario.setId(1L);
 		usuario.setLogin("ricardo");
 		usuario.setNome("Ricardo Lima Amaral");
 		usuario.setSenha("r1234");
 		
-		//interfaceSpringDataUser.save(usuario);
+		interfaceSpringDataUser.save(usuario);
 		
-		//System.out.println("Dados gravados com sucesso!!!");
+		//System.out.println("Cadastrados: " + interfaceSpringDataUser.count());
 	}
 	
 }
