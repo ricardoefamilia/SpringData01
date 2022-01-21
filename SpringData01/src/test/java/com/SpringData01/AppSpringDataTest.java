@@ -17,18 +17,16 @@ public class AppSpringDataTest {
 	
 	@Test
 	public void testeInsert() {
-		//System.out.println("Iniciou o Spring com sucesso!!!");
 		Usuario usuario = new Usuario();
 		usuario.setEmail("ricardo@gmail.com");
 		usuario.setIdade(51);
-		//usuario.setId(1L);
 		usuario.setLogin("ricardo");
 		usuario.setNome("Ricardo Lima Amaral");
 		usuario.setSenha("r1234");
 		
 		interfaceSpringDataUser.save(usuario);
 		
-		//System.out.println("Cadastrados: " + interfaceSpringDataUser.count());
+		System.out.println("Cadastrados: " + interfaceSpringDataUser.count());
 	}
 	
 }
