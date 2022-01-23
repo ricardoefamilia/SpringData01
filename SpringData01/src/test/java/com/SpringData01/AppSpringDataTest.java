@@ -22,11 +22,11 @@ public class AppSpringDataTest {
 
 		Usuario usuario = new Usuario();
 
-		usuario.setEmail("ricardo@gmail.com");
+		usuario.setEmail("Alex@gmail.com");
 		usuario.setIdade(31);
-		usuario.setLogin("ricardo");
-		usuario.setSenha("r123");
-		usuario.setNome("Ricardo Lima Amaral");
+		usuario.setLogin("Alex");
+		usuario.setSenha("a123");
+		usuario.setNome("Alex Amaral");
 
 		interfaceSpringDataUser.save(usuario);
 
