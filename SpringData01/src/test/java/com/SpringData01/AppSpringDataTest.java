@@ -1,5 +1,7 @@
 package com.SpringData01;
 
+import java.util.Optional;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,8 +33,61 @@ public class AppSpringDataTest {
 		interfaceSpringDataUser.save(usuario);
 
 		System.out.println("Usuarios cadastrados -> " + interfaceSpringDataUser.count());
+	}
+	
+	@Test
+	public void testeConsultaId() {
+		Optional<Usuario> usuario = interfaceSpringDataUser.findById(3L);
+		System.out.println("Nome: " + usuario.get().getNome());
+		System.out.println("E-Mail: " + usuario.get().getEmail());
+		System.out.println("Idade: " + usuario.get().getIdade());
+		System.out.println("Código: " + usuario.get().getId());
+		System.out.println("Login: " + usuario.get().getLogin());
+	}
+		
+	
+	@Test
+	public void testeConsultaTodos() {
+		Iterable<Usuario> lista = interfaceSpringDataUser.findAll();
+		for (Usuario usuario : lista) {
+			System.out.println("Nome: " + usuario.getNome());
+			System.out.println("E-Mail: " + usuario.getEmail());
+			System.out.println("Idade: " + usuario.getIdade());
+			System.out.println("Código: " + usuario.getId());
+			System.out.println("Login: " + usuario.getLogin());
+			System.out.println();
+		}
+	}
+	
+	@Test
+	public void testeUpdate() {
+
+		Optional<Usuario> usuarioOptional = interfaceSpringDataUser.findById(3L);
+		Usuario usuario = usuarioOptional.get();
+		
+		usuario.setEmail("Alexandre@gmail.com");
+		usuario.setIdade(52);
+		usuario.setLogin("Alexandre");
+		usuario.setSenha("a123");
+		usuario.setNome("Alexandre Amaral");
+
+		interfaceSpringDataUser.save(usuario);
+		
+		testeConsultaTodos();
 
 	}
-
+	
+	@Test
+	public void testeDelete() {
+		/*
+		Optional<Usuario> usuarioOptional = interfaceSpringDataUser.findById(3L);
+		Usuario usuario = usuarioOptional.get();
+		
+		interfaceSpringDataUser.delete(usuario);
+		*/
+		interfaceSpringDataUser.deleteById(1L);
+		
+		testeConsultaTodos();
+	}
 	
 }
