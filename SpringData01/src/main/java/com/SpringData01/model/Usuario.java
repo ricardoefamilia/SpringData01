@@ -1,9 +1,13 @@
 package com.SpringData01.model;
 
+import java.util.List;
+
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Usuario{
@@ -16,6 +20,15 @@ public class Usuario{
 	private String nome;
 	private String email;
 	private int idade;
+	@OneToMany(mappedBy = "usuario", orphanRemoval = true, fetch = FetchType.EAGER)
+	private List<Telefone> listaTel;
+	
+	public void setListaTel(List<Telefone> listaTel) {
+		this.listaTel = listaTel;
+	}
+	public List<Telefone> getListaTel() {
+		return listaTel;
+	}
 	
 	public Long getId() {
 		return id;

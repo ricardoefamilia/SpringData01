@@ -9,7 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import com.SpringData01.dao.InterfaceSpringDataTel;
 import com.SpringData01.dao.InterfaceSpringDataUser;
+import com.SpringData01.model.Telefone;
 import com.SpringData01.model.Usuario;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -19,17 +21,20 @@ public class AppSpringDataTest {
 	// interface para realizar os métodos de CRUD do spring.
 	@Autowired
 	private InterfaceSpringDataUser interfaceSpringDataUser;
+	
+	@Autowired
+	private InterfaceSpringDataTel interfaceSpringDataTel;
 
 	@Test
 	public void testeInsert() {
 
 		Usuario usuario = new Usuario();
 
-		usuario.setEmail("Alex@gmail.com");
-		usuario.setIdade(31);
-		usuario.setLogin("Alex");
-		usuario.setSenha("a123");
-		usuario.setNome("Alex Amaral");
+		usuario.setEmail("fernando@gmail.com");
+		usuario.setIdade(33);
+		usuario.setLogin("fernando");
+		usuario.setSenha("f123");
+		usuario.setNome("Fernando Nascimento Rodrigues");
 
 		interfaceSpringDataUser.save(usuario);
 
@@ -56,7 +61,12 @@ public class AppSpringDataTest {
 			System.out.println("Idade: " + usuario.getIdade());
 			System.out.println("Código: " + usuario.getId());
 			System.out.println("Login: " + usuario.getLogin());
+			
+			for (Telefone telefone : usuario.getListaTel()) {
+				System.out.println("Telefone: " + telefone.getNumero() + " (" + telefone.getTipo() + ").");
+			}
 			System.out.println();
+			System.out.println("------------------------------------------");			
 		}
 	}
 
@@ -130,6 +140,20 @@ public class AppSpringDataTest {
 		interfaceSpringDataUser.updateEmailPorNome("alexamaral@hotmail.com","Alex Amaral");
 		System.out.println("------------------------------------------");
 		testeConsultaTodos();
+	}
+	
+	@Test
+	public void testeInsertTelefone() {
+		Optional<Usuario> usuario = interfaceSpringDataUser.findById(5L);
+		
+		Telefone telefone = new Telefone();
+		telefone.setTipo("Trabalho");
+		telefone.setNumero("(61)3555-8899");
+		telefone.setUsuario(usuario.get());
+		
+		interfaceSpringDataTel.save(telefone);
+		
+		
 	}
 
 }
