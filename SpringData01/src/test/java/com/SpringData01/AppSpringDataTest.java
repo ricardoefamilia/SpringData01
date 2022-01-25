@@ -139,21 +139,37 @@ public class AppSpringDataTest {
 		testeConsultaTodos();
 		interfaceSpringDataUser.updateEmailPorNome("alexamaral@hotmail.com","Alex Amaral");
 		System.out.println("------------------------------------------");
-		testeConsultaTodos();
+
 	}
 	
 	@Test
 	public void testeInsertTelefone() {
-		Optional<Usuario> usuario = interfaceSpringDataUser.findById(5L);
+		Optional<Usuario> usuario = interfaceSpringDataUser.findById(2L);
 		
 		Telefone telefone = new Telefone();
 		telefone.setTipo("Trabalho");
-		telefone.setNumero("(61)3555-8899");
+		telefone.setNumero("(61)9998-8899");
 		telefone.setUsuario(usuario.get());
 		
 		interfaceSpringDataTel.save(telefone);
+		testeConsultaTodos();
 		
+	}
+	
+	@Test
+	public void testeUpdateTelefone() {
+		Optional<Telefone> telefoneOptional = interfaceSpringDataTel.findById(9L);
+		Telefone telefone = telefoneOptional.get();
+
+		Optional<Usuario> usuario = interfaceSpringDataUser.findById(2L);
 		
+		telefone.setTipo("Celular");
+		telefone.setNumero("(61)9998-8899");
+		telefone.setUsuario(usuario.get());
+
+		interfaceSpringDataTel.save(telefone);
+
+		testeConsultaTodos();
 	}
 
 }
